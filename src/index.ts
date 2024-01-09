@@ -28,8 +28,10 @@ const logger = generateCoreLogger();
 const action = async () => {
   const token = getInput("GITHUB_TOKEN", { required: true });
   const repoInfo = getRepo(context);
+  const requireAutoMerge: boolean =
+    getInput("REQUIRE_AUTO_MERGE", { required: false }) !== "false";
   const api = new PullRequestApi(getOctokit(token), repoInfo, logger);
-  const prs = await api.listPRs(false);
+  const prs = await api.listPRs(requireAutoMerge);
   if (prs.length > 0) {
     logger.info(`About to update ${prs.length} PRs 🗄️`);
     const rows: SummaryTableRow[] = [
