@@ -1,4 +1,4 @@
-import { getInput, setFailed, setOutput, summary } from "@actions/core";
+import { getInput, setFailed, summary } from "@actions/core";
 import { SummaryTableRow } from "@actions/core/lib/summary";
 import { context, getOctokit } from "@actions/github";
 import { Context } from "@actions/github/lib/context";
