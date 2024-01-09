@@ -1,4 +1,4 @@
-import { getInput, setFailed, setOutput, summary } from "@actions/core";
+import { getInput, setFailed, summary } from "@actions/core";
 import { SummaryTableRow } from "@actions/core/lib/summary";
 import { context, getOctokit } from "@actions/github";
 import { Context } from "@actions/github/lib/context";
@@ -20,16 +20,15 @@ const getRepo = (ctx: Context) => {
   return { repo, owner };
 };
 
-const repo = getRepo(context);
-
-setOutput("repo", `${repo.owner}/${repo.repo}`);
 const logger = generateCoreLogger();
 
 const action = async () => {
   const token = getInput("GITHUB_TOKEN", { required: true });
   const repoInfo = getRepo(context);
-  const api = new PullRequestApi(getOctokit(token), repoInfo);
-  const prs = await api.listPRs(false);
+  const requireAutoMerge: boolean =
+    getInput("REQUIRE_AUTO_MERGE", { required: false }) !== "false";
+  const api = new PullRequestApi(getOctokit(token), repoInfo, logger);
+  const prs = await api.listPRs(requireAutoMerge);
   if (prs.length > 0) {
     logger.info(`About to update ${prs.length} PRs 🗄️`);
     const rows: SummaryTableRow[] = [
@@ -39,6 +38,12 @@ const action = async () => {
         { data: "Result", header: true },
       ],
     ];
+
+    // JSON array with all the PRs numbers
+    const prsNumbers = JSON.stringify(prs.map(({ number }) => number));
+
+    logger.info(`About to update PRs: ${prsNumbers}`);
+
     for (const { number, title } of prs.sort((a, b) => a.number - b.number)) {
       logger.info(`📡 - Updating '${title}' #${number}`);
       const repoTxt = `${repoInfo.owner}/${repoInfo.repo}#${number}`;
@@ -59,7 +64,10 @@ const action = async () => {
       .write();
   } else {
     logger.info("No matching PRs found. Aborting");
-    summary.addHeading("Up to date", 1).addHeading("No matching PRs found");
+    await summary
+      .addHeading("Up to date", 1)
+      .addHeading("No matching PRs found")
+      .write();
   }
 };
 
