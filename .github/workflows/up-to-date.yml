@@ -12,4 +12,4 @@ jobs:
       - name: Update all the PRs
         uses: paritytech/up-to-date-action@main
         with:
-          GITHUB_TOKEN: ${{ github.secret }}
+          GITHUB_TOKEN: ${{ github.token }}
