@@ -20,9 +20,6 @@ const getRepo = (ctx: Context) => {
   return { repo, owner };
 };
 
-const repo = getRepo(context);
-
-setOutput("repo", `${repo.owner}/${repo.repo}`);
 const logger = generateCoreLogger();
 
 const action = async () => {
@@ -42,9 +39,10 @@ const action = async () => {
       ],
     ];
 
-    logger.info(
-      `About to update PRs: ${JSON.stringify(prs.map(({ number }) => number))}`,
-    );
+    // JSON array with all the PRs numbers
+    const prsNumbers = JSON.stringify(prs.map(({ number }) => number));
+
+    logger.info(`About to update PRs: ${prsNumbers}`);
 
     for (const { number, title } of prs.sort((a, b) => a.number - b.number)) {
       logger.info(`📡 - Updating '${title}' #${number}`);
