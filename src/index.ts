@@ -28,7 +28,7 @@ const logger = generateCoreLogger();
 const action = async () => {
   const token = getInput("GITHUB_TOKEN", { required: true });
   const repoInfo = getRepo(context);
-  const api = new PullRequestApi(getOctokit(token), logger, repoInfo);
+  const api = new PullRequestApi(getOctokit(token), repoInfo);
   const prs = await api.listPRs(true);
   if (prs.length > 0) {
     logger.info(`About to update ${prs.length} PRs 🗄️`);

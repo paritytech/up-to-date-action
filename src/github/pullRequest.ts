@@ -1,10 +1,9 @@
-import { ActionLogger, GitHubClient } from "./types";
+import { GitHubClient } from "./types";
 
 /** API class that uses the default token to access the data from the pull request and the repository */
 export class PullRequestApi {
   constructor(
     private readonly api: GitHubClient,
-    private readonly logger: ActionLogger,
     private readonly repo: { owner: string; repo: string },
   ) {}
 
