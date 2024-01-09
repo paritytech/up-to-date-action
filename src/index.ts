@@ -59,7 +59,10 @@ const action = async () => {
       .write();
   } else {
     logger.info("No matching PRs found. Aborting");
-    summary.addHeading("Up to date", 1).addHeading("No matching PRs found");
+    await summary
+      .addHeading("Up to date", 1)
+      .addHeading("No matching PRs found")
+      .write();
   }
 };
 
