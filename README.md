@@ -81,3 +81,13 @@ To work on this app, you require
 Use `yarn install` to set up the project.
 
 `yarn build` compiles the TypeScript code to JavaScript.
+
+## Deployment
+To deploy a new version you need to update two files:
+- [`package.json`](./package.json): Update the version number.
+- [`action.yml`](./action.yml): Update the image number in `runs.image`.
+**Important**: Both versions must have the same number.
+
+When a commit is pushed to the main branch and the versions have changed, the system will automatically tag the commit and release a new package with such version.
+
+You can find all the available versions in the [release section](../releases).
