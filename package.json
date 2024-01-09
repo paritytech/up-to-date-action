@@ -1,7 +1,7 @@
 {
-  "name": "parity-action-template",
+  "name": "up-to-date-action",
   "version": "0.0.1",
-  "description": "GitHub action template for Parity",
+  "description": "Keep all your PRs up to date when a new commit is pushed to the main branch",
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Bullrich/parity-action-template.git"
+    "url": "git+https://github.com/paritytech/up-to-date-action.git"
   },
   "author": "Javier Bullrich <javier@bullrich.dev>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Bullrich/parity-action-template/issues"
+    "url": "https://github.com/paritytech/up-to-date-action/issues"
   },
-  "homepage": "https://github.com/Bullrich/parity-action-template#readme",
+  "homepage": "https://github.com/paritytech/up-to-date-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^6.0.0",

@@ -1,6 +1,6 @@
-# Parity GitHub Action template
+# Up to date action
 
-Template used to generate GitHub Actions.
+Keep your pull request up to date when the target branch changes.
 
 ## To start
 
