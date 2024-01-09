@@ -40,8 +40,8 @@ const action = async () => {
       ],
     ];
     for (const { number, title } of prs) {
-      logger.info(`📡 - Updating ${title} #${number}`);
-      const repoTxt = `[#${number}](https://github.com/${repoInfo.owner}/${repoInfo.repo}/pull/${number})`;
+      logger.info(`📡 - Updating '${title}' #${number}`);
+      const repoTxt = `${repoInfo.owner}/${repoInfo.repo}#${number}`;
       try {
         await api.update(number);
         rows.push([repoTxt, title, "Pass ✅"]);
