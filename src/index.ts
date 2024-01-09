@@ -51,7 +51,7 @@ const action = async () => {
         rows.push([repoTxt, title, "Fail ❌"]);
       }
     }
-    logger.info(" - Finished updating PRs");
+    logger.info("🪄 - Finished updating PRs");
     await summary
       .addHeading("Up to date", 1)
       .addHeading("PRs updated", 3)
