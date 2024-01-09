@@ -1,4 +1,4 @@
-import { getInput, setOutput, summary } from "@actions/core";
+import { getInput, setFailed, setOutput, summary } from "@actions/core";
 import { SummaryTableRow } from "@actions/core/lib/summary";
 import { context, getOctokit } from "@actions/github";
 import { Context } from "@actions/github/lib/context";
@@ -67,4 +67,4 @@ action()
   .then(() => {
     logger.info("Operation completed");
   })
-  .catch((e) => logger.error(e as Error));
+  .catch(setFailed);
