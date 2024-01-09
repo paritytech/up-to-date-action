@@ -45,6 +45,8 @@ In some cases, specially in big organizations, it is more organized to use a Git
 - Repository permissions:
 	- Pull Requests
 		- [x] Write
+    - Contents
+        - [x] Write
 
 Because this project is intended to be used with a token we need to do an extra step to generate one from the GitHub app:
 - After you create the app, copy the *App ID* and the *private key* and set them as secrets.
