@@ -30,6 +30,7 @@ jobs:
         uses: paritytech/up-to-date-action@main
         with:
           GITHUB_TOKEN: ${{ secret.PAT }}
+          REQUIRE_AUTO_MERGE: true
 ```
 
 ### Inputs
@@ -65,6 +66,12 @@ Because this project is intended to be used with a token we need to do an extra 
           # The previous step generates a token which is used as the input for this action
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 ```
+
+### REQUIRE_AUTO_MERGE
+
+If **only** Pull Request that have the [`auto-merge`](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request) feature enabled should be update.
+
+It defaults to `true`.
 
 ## Development
 To work on this app, you require
