@@ -35,19 +35,20 @@ const action = async () => {
     const rows: SummaryTableRow[] = [
       [
         { data: "PR Number", header: true },
+        { data: "Title", header: true },
         { data: "Result", header: true },
       ],
     ];
-    for (const number of prs) {
-      logger.info(`📡 - Updating #${number}`);
+    for (const { number, title } of prs) {
+      logger.info(`📡 - Updating ${title} #${number}`);
       const repoTxt = `[#${number}](https://github.com/${repoInfo.owner}/${repoInfo.repo}/pull/${number})`;
       try {
         await api.update(number);
-        rows.push([repoTxt, "Pass ✅"]);
+        rows.push([repoTxt, title, "Pass ✅"]);
         logger.info(`📥 - Updated #${number}`);
       } catch (error) {
         logger.error(error as string | Error);
-        rows.push([repoTxt, "Fail ❌"]);
+        rows.push([repoTxt, title, "Fail ❌"]);
       }
     }
     logger.info(" - Finished updating PRs");
