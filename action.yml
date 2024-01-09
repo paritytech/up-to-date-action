@@ -1,9 +1,9 @@
-name: "Example Action"
-description: "This values need to be changed"
+name: "Up to Date PRs"
+description: "Keep all your PRs up to date when a new commit is pushed to the main branch"
 author: Bullrich
 branding:
-  icon: copy
-  color: yellow
+  icon: git-merge
+  color: gray-dark
 inputs:
   GITHUB_TOKEN:
     required: true

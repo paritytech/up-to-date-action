@@ -1,0 +1,15 @@
+name: Up to date
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  updatePullRequests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update all the PRs
+        uses: paritytech/up-to-date-action@main
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
