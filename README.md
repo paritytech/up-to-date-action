@@ -17,7 +17,10 @@ It basically does the same thing as pressing the following button:
 ```yml
 name: Up to date
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
 
 jobs:
   updatePullRequests:

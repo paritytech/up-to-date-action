@@ -1,6 +1,9 @@
 name: Up to date
 
-on: [push]
+on:
+  push:
+    branches:
+      - 'main'
 
 jobs:
   updatePullRequests:
