@@ -29,7 +29,7 @@ const action = async () => {
   const token = getInput("GITHUB_TOKEN", { required: true });
   const repoInfo = getRepo(context);
   const api = new PullRequestApi(getOctokit(token), repoInfo);
-  const prs = await api.listPRs(true);
+  const prs = await api.listPRs(false);
   if (prs.length > 0) {
     logger.info(`About to update ${prs.length} PRs 🗄️`);
     const rows: SummaryTableRow[] = [
