@@ -69,7 +69,7 @@ Because this project is intended to be used with a token we need to do an extra 
 
 ### REQUIRE_AUTO_MERGE
 
-If **only** Pull Request that have the [`auto-merge`](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request) feature enabled should be update.
+If **only** Pull Request that have the [`auto-merge`](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/automatically-merging-a-pull-request) feature enabled should be updated.
 
 It defaults to `true`.
 
