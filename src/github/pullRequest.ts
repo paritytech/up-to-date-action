@@ -21,9 +21,11 @@ export class PullRequestApi {
       const { number, title } = pr;
 
       if (pr.draft) {
-        this.logger.debug(`Ignoring #${number} because it is a draft`);
+        this.logger.debug(`❕ - Ignoring #${number} because it is a draft`);
       } else if (!pr.auto_merge && onlyAutoMerge) {
-        this.logger.debug(`Ignoring #${number} because auto-merge is disabled`);
+        this.logger.debug(
+          `❗️ - Ignoring #${number} because auto-merge is not enabled`,
+        );
       } else {
         prs.push({ number, title });
       }

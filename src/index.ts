@@ -39,6 +39,11 @@ const action = async () => {
         { data: "Result", header: true },
       ],
     ];
+
+    logger.info(
+      `About to update PRs: ${JSON.stringify(prs.map(({ number }) => number))}`,
+    );
+
     for (const { number, title } of prs.sort((a, b) => a.number - b.number)) {
       logger.info(`📡 - Updating '${title}' #${number}`);
       const repoTxt = `${repoInfo.owner}/${repoInfo.repo}#${number}`;
