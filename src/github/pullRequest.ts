@@ -11,10 +11,14 @@ export class PullRequestApi {
   ) {}
 
   async listPRs(onlyAutoMerge: boolean): Promise<PullData[]> {
+    this.logger.debug("Fetching list of PR");
+
     const openPRs = await this.api.paginate(this.api.rest.pulls.list, {
       ...this.repo,
       state: "open",
     });
+
+    this.logger.debug(JSON.stringify(openPRs));
 
     const prs: PullData[] = [];
     for (const pr of openPRs) {
