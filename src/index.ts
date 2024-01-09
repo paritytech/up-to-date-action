@@ -39,7 +39,7 @@ const action = async () => {
         { data: "Result", header: true },
       ],
     ];
-    for (const { number, title } of prs) {
+    for (const { number, title } of prs.sort((a, b) => a.number - b.number)) {
       logger.info(`📡 - Updating '${title}' #${number}`);
       const repoTxt = `${repoInfo.owner}/${repoInfo.repo}#${number}`;
       try {
