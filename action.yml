@@ -18,4 +18,4 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://ghcr.io/paritytech/up-to-date-action/action:0.1.0'

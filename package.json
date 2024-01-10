@@ -1,6 +1,6 @@
 {
   "name": "up-to-date-action",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Keep all your PRs up to date when a new commit is pushed to the main branch",
   "main": "src/index.ts",
   "scripts": {
