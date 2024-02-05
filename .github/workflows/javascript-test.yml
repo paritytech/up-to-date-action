@@ -7,10 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use node 18
+      - name: Use node 20
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - uses: c-hive/gha-yarn-cache@v2
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use node 18
+      - name: Use node 20
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - uses: c-hive/gha-yarn-cache@v2
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -33,10 +33,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use node 18
+      - name: Use node 20
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
       - uses: c-hive/gha-yarn-cache@v2
       - name: Install dependencies
         run: yarn install --frozen-lockfile
