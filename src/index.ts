@@ -60,7 +60,7 @@ const action = async () => {
           "# Failed to update PR ❌\n\n" +
             "There was an error while trying to keep this PR `up-to-date`\n\n" +
             "You may have conflicts ‼️ or may have to manually sync it with the target branch 👉❇️\n\n" +
-            `More info in the [logs](${actionUrl}) 📋`,
+            `More info in the [logs 📋](${actionUrl})`,
         );
       }
     }
