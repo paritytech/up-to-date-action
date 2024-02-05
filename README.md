@@ -24,6 +24,7 @@ on:
 
 jobs:
   updatePullRequests:
+    name: Keep PRs up to date
     runs-on: ubuntu-latest
     steps:
       - name: Update all the PRs
