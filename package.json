@@ -10,6 +10,9 @@
     "fix": "eslint --fix 'src/**/*'",
     "lint": "eslint 'src/**/*'"
   },
+  "engines": {
+    "node": "^20"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paritytech/up-to-date-action.git"
