@@ -25,6 +25,7 @@ const logger = generateCoreLogger();
 const action = async () => {
   const token = getInput("GITHUB_TOKEN", { required: true });
   const repoInfo = getRepo(context);
+  const actionUrl = `${context.serverUrl}/${repoInfo.owner}/${repoInfo.repo}/actions/runs/${context.runId}`;
   const requireAutoMerge: boolean =
     getInput("REQUIRE_AUTO_MERGE", { required: false }) !== "false";
   const api = new PullRequestApi(getOctokit(token), repoInfo, logger);
@@ -54,6 +55,13 @@ const action = async () => {
       } catch (error) {
         logger.error(error as string | Error);
         rows.push([repoTxt, title, "Fail ❌"]);
+        await api.comment(
+          number,
+          "# Failed to update PR ❌\n\n" +
+            "There was an error while trying to keep this PR `up-to-date`\n\n" +
+            "You may have conflicts ‼️ or may have to manually sync it with the target branch 👉❇️\n\n" +
+            `More info in the [logs](${actionUrl}) 📋`,
+        );
       }
     }
     logger.info("🪄 - Finished updating PRs");

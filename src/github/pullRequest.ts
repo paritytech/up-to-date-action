@@ -45,4 +45,12 @@ export class PullRequestApi {
 
     return data.message;
   }
+
+  async comment(number: number, msg: string): Promise<void> {
+    await this.api.rest.issues.createComment({
+      ...this.repo,
+      issue_number: number,
+      body: msg,
+    });
+  }
 }
