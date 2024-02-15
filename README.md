@@ -45,9 +45,11 @@ jobs:
 ##### Using a GitHub app instead of a PAT
 In some cases, specially in big organizations, it is more organized to use a GitHub app to authenticate, as it allows us to give it permissions per repository and we can fine-grain them even better. If you wish to do that, you need to create a GitHub app with the following permissions:
 - Repository permissions:
-	- Pull Requests
-		- [x] Write
+    - Pull Requests
+        - [x] Write
     - Contents
+        - [x] Write
+    - Workflows
         - [x] Write
 
 Because this project is intended to be used with a token we need to do an extra step to generate one from the GitHub app:
