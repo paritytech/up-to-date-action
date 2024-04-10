@@ -8,7 +8,11 @@
     "build": "ncc build --license LICENSE",
     "test": "jest",
     "fix": "eslint --fix 'src/**/*'",
-    "lint": "eslint 'src/**/*'"
+    "lint": "eslint 'src/**/*'",
+    "codegen": "graphql-codegen --config codegen.ts",
+    "graphql": "node scripts/copy-files && yarn codegen",
+    "postinstall": "yarn run graphql",
+    "prebuild": "yarn run graphql"
   },
   "engines": {
     "node": "^20"
