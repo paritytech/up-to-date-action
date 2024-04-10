@@ -82,7 +82,14 @@ describe("Pull Request API Tests", () => {
           title: "one",
         },
       },
-      { node: { number: 2, viewerCanUpdateBranch: true, isDraft:true, title: "two" } },
+      {
+        node: {
+          number: 2,
+          viewerCanUpdateBranch: true,
+          isDraft: true,
+          title: "two",
+        },
+      },
     ];
     client.graphql.mockResolvedValue({
       repository: {
