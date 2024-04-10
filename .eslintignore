@@ -1,3 +1,6 @@
 node_modules
 dist
 .git
+
+# Graphql Generated files
+src/github/queries/*
