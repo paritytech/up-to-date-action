@@ -1,6 +1,6 @@
 import { DeepMockProxy, mock, mockDeep, MockProxy } from "jest-mock-extended";
 
-import { PullRequestApi } from "../github/pullRequest";
+import { PullRequest, PullRequestApi } from "../github/pullRequest";
 import { ActionLogger, GitHubClient } from "../github/types";
 
 describe("Pull Request API Tests", () => {
@@ -19,52 +19,90 @@ describe("Pull Request API Tests", () => {
   });
 
   test("Should filter prs without auto-merge", async () => {
-    const mockedPrs = [
-      { number: 1, auto_merge: true, title: "one" },
-      { number: 2, auto_merge: false, title: "two" },
+    const mockedPrs: { node: Partial<PullRequest> }[] = [
+      {
+        node: {
+          number: 1,
+          autoMergeRequest: { enabledAt: "abc" },
+          viewerCanUpdateBranch: true,
+          title: "one",
+        },
+      },
+      { node: { number: 2, viewerCanUpdateBranch: true, title: "two" } },
     ];
-    client.paginate.mockResolvedValue(mockedPrs);
+    client.graphql.mockResolvedValue({
+      repository: {
+        pullRequests: { edges: mockedPrs, pageInfo: { hasNextPage: false } },
+      },
+    });
     const prs = await api.listPRs(true);
     expect(prs).toHaveLength(1);
     expect(prs).toContainEqual({
-      number: mockedPrs[0].number,
-      title: mockedPrs[0].title,
+      number: mockedPrs[0].node.number,
+      title: mockedPrs[0].node.title,
     });
     expect(prs).not.toContainEqual({
-      number: mockedPrs[1].number,
-      title: mockedPrs[1].title,
+      number: mockedPrs[1].node.number,
+      title: mockedPrs[1].node.title,
     });
   });
 
   test("Should return all prs without filter", async () => {
-    const mockedPrs = [
-      { number: 1, auto_merge: true, title: "one" },
-      { number: 2, auto_merge: false, title: "two" },
+    const mockedPrs: { node: Partial<PullRequest> }[] = [
+      {
+        node: {
+          number: 1,
+          autoMergeRequest: { enabledAt: "abc" },
+          viewerCanUpdateBranch: true,
+          title: "one",
+        },
+      },
+      { node: { number: 2, viewerCanUpdateBranch: true, title: "two" } },
     ];
-    client.paginate.mockResolvedValue(mockedPrs);
+    client.graphql.mockResolvedValue({
+      repository: {
+        pullRequests: { edges: mockedPrs, pageInfo: { hasNextPage: false } },
+      },
+    });
     const prs = await api.listPRs(false);
     expect(prs).toHaveLength(2);
     expect(prs).toEqual([
-      { number: mockedPrs[0].number, title: mockedPrs[0].title },
-      { number: mockedPrs[1].number, title: mockedPrs[1].title },
+      { number: mockedPrs[0].node.number, title: mockedPrs[0].node.title },
+      { number: mockedPrs[1].node.number, title: mockedPrs[1].node.title },
     ]);
   });
 
   test("Should filter drafts PRs", async () => {
-    const mockedPrs = [
-      { number: 1, auto_merge: false, title: "one" },
-      { number: 2, auto_merge: false, draft: true, title: "two" },
+    const mockedPrs: { node: Partial<PullRequest> }[] = [
+      {
+        node: {
+          number: 1,
+          autoMergeRequest: { enabledAt: "abc" },
+          viewerCanUpdateBranch: true,
+          title: "one",
+        },
+      },
+      { node: { number: 2, viewerCanUpdateBranch: true, isDraft:true, title: "two" } },
     ];
-    client.paginate.mockResolvedValue(mockedPrs);
+    client.graphql.mockResolvedValue({
+      repository: {
+        pullRequests: { edges: mockedPrs, pageInfo: { hasNextPage: false } },
+      },
+    });
+    client.graphql.mockResolvedValue({
+      repository: {
+        pullRequests: { edges: mockedPrs, pageInfo: { hasNextPage: false } },
+      },
+    });
     const prs = await api.listPRs(false);
     expect(prs).toHaveLength(1);
     expect(prs).toContainEqual({
-      number: mockedPrs[0].number,
-      title: mockedPrs[0].title,
+      number: mockedPrs[0].node.number,
+      title: mockedPrs[0].node.title,
     });
     expect(prs).not.toContainEqual({
-      number: mockedPrs[1].number,
-      title: mockedPrs[1].title,
+      number: mockedPrs[1].node.number,
+      title: mockedPrs[1].node.title,
     });
   });
 });

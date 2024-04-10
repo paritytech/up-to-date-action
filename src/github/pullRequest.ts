@@ -4,7 +4,7 @@ import { ActionLogger, GitHubClient } from "./types";
 
 type PullData = { number: number; title: string };
 
-type PullRequest = NonNullable<
+export type PullRequest = NonNullable<
   NonNullable<
     NonNullable<
       NonNullable<PullRequestsQuery["repository"]>["pullRequests"]["edges"]
