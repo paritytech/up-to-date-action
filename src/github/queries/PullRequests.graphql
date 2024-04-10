@@ -1,0 +1,27 @@
+query PullRequests($cursor: String, $owner: String!, $repo: String!) {
+  repository(owner: $owner, name: $repo) {
+    pullRequests(
+        first: 100
+     states: OPEN 
+    orderBy: { field: UPDATED_AT, direction: ASC }
+      after: $cursor) {
+      edges {
+        node {
+          number
+          title
+          viewerCanUpdateBranch
+          isDraft
+          autoMergeRequest {
+            enabledAt
+          }
+        }
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
+        hasPreviousPage
+      }
+    }
+  }
+}
